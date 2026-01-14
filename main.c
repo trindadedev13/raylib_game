@@ -18,6 +18,14 @@ main (void)
   InitWindow (win_width, win_height, "teste");
   DisableCursor ();
   SetTargetFPS (60);
+
+  Vector3 terrain_pos = {
+    0.f, 0.f, 0.f
+  };
+  Vector2 terrain_size = {
+    10.f, 1.0f
+  };
+
   while (!WindowShouldClose ())
   {
     UpdateCamera (&camera, CAMERA_FREE);
@@ -28,7 +36,7 @@ main (void)
     BeginMode3D (camera);
       DrawCube (cube_pos, 2.f, 2.f, 2.f, BLUE);
       DrawCubeWires(cube_pos, 2.f, 2.f, 2.f, MAROON);
-      DrawPlane((Vector3){0.0f,0.0f,0.0f}, (Vector2){32.0f,32.0f}, GREEN);
+      DrawPlane(terrain_pos, terrain_size, GREEN);
       DrawGrid (10, 1.f);
     EndMode3D ();
 
