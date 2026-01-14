@@ -1,5 +1,6 @@
 #include <raylib.h>
 
+#include "gamepad.h"
 #include "sun.h"
 #include "church.h"
 #include "rlext.h"
@@ -44,6 +45,8 @@ main (void) {
   state.height = GetScreenHeight ();
   SetWindowSize (state.width, state.height);
   SetConfigFlags (FLAG_FULLSCREEN_MODE);
+#else
+  DisableCursor ();
 #endif
 
   Camera camera = { 0 };
@@ -72,12 +75,13 @@ main (void) {
               .scale = 3.f,
               .pos = (Vector3){ 0.f, 10.f, 10.f } };
   LoadSunTexture (&sun);
-
+  
   // criar igreja
   Church church = {.pos =(Vector3) {0.f, 0.f, 0.f}};
   LoadChurch(&church);
 
-  DisableCursor();
+  Pad pad = {0};
+  CreatePad(&pad);
 
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FREE);
@@ -94,6 +98,7 @@ main (void) {
       EndMode3D ();
 
       DrawFPS (700, 15);
+      DrawPad (&pad, &camera);
     EndDrawing ();
     //----------------------------------------------------------------------------------
   }

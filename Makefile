@@ -8,7 +8,7 @@ clean:
 	rm -rf *.o
 	rm -rf raylib_game
 
-raylib_game: main.o rlext.o church.o sun.o
+raylib_game: main.o rlext.o church.o sun.o gamepad.o
 	$(CC) $(CC_FLAGS) $^ $(LIBS) -o $@
 
 main.o: src/main.c
@@ -21,6 +21,9 @@ church.o: src/church.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 sun.o: src/sun.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+gamepad.o: src/gamepad.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 run:
