@@ -1,14 +1,26 @@
 [
 {
   "directory": "/data/data/com.termux/files/home/jogo/build",
-  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/main.c.o -c /data/data/com.termux/files/home/jogo/src/main.c",
+  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/main.c.o -c /data/data/com.termux/files/home/jogo/src/main.c -Iinclude/",
   "file": "/data/data/com.termux/files/home/jogo/src/main.c",
   "output": "CMakeFiles/raylib_game.dir/src/main.c.o"
 },
 {
   "directory": "/data/data/com.termux/files/home/jogo/build",
-  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/rlext.c.o -c /data/data/com.termux/files/home/jogo/src/rlext.c",
+  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/rlext.c.o -c /data/data/com.termux/files/home/jogo/src/rlext.c -Iinclude/",
   "file": "/data/data/com.termux/files/home/jogo/src/rlext.c.c",
   "output": "CMakeFiles/raylib_game.dir/src/rlext.c.o"
+},
+{
+  "directory": "/data/data/com.termux/files/home/jogo/build",
+  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/church.c.o -c /data/data/com.termux/files/home/jogo/src/church.c -Iinclude/",
+  "file": "/data/data/com.termux/files/home/jogo/src/church.c.c",
+  "output": "CMakeFiles/raylib_game.dir/src/church.c.o"
+},
+{
+  "directory": "/data/data/com.termux/files/home/jogo/build",
+  "command": "/data/data/com.termux/files/usr/bin/cc  -I/data/data/com.termux/files/home/jogo/include  -Wall -pedantic -O2 -g -DNDEBUG -std=gnu99 -I/data/data/com.termux/files/usr/include -o CMakeFiles/raylib_game.dir/src/sun.c.o -c /data/data/com.termux/files/home/jogo/src/sun.c -Iinclude/",
+  "file": "/data/data/com.termux/files/home/jogo/src/sun.c.c",
+  "output": "CMakeFiles/raylib_game.dir/src/sun.c.o"
 }
 ]
