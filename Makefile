@@ -1,15 +1,15 @@
-CC      = gcc
+CC       = gcc
 CC_FLAGS = -Wall -std=c99 -pedantic -Iinclude
-LIBS    = -L"C:/raylib/lib" -lraylib -lopengl32 -lgdi32 -lwinmm -lkernel32
+LIBS     = -lraylib
 
-all: raylib_game.exe
+all: raylib_game
 
 clean:
-	del /Q *.o
-	del /Q raylib_game.exe
+	rm -rf *.o
+	rm -rf raylib_game
 
-raylib_game.exe: main.o rlext.o church.o sun.o
-	$(CC) $(CC_FLAGS) $^ $(LIBS) -o $@
+raylib_game: main.o rlext.o church.o sun.o
+	$(CC) $(CC_FLAGS) $(LIBS) $^ -o $@
 
 main.o: src/main.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
@@ -24,4 +24,4 @@ sun.o: src/sun.c
 	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 run:
-	.\raylib_game.exe
+	./raylib_game
