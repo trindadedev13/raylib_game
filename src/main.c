@@ -74,6 +74,8 @@ main (void) {
   Church church = {.pos =(Vector3) {0.f, 0.f, 0.f}};
   LoadChurch(&church);
 
+  DisableCursor();
+
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FREE);
 
