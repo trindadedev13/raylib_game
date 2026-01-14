@@ -31,8 +31,8 @@ LoadBloomShader (void) {
 int
 main (void) {
 #ifndef __ANDROID__
-  state.width = 800;
-  state.height = 800;
+  state.width = 720;
+  state.height = 360;
 #endif
   state.bg_color = (Color){ 0, 0, 20, 255 };
 
@@ -79,32 +79,16 @@ main (void) {
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FREE);
 
-    BeginTextureMode (target);
-      ClearBackground (BLANK);
-
-      BeginMode3D (camera);
-        DrawSun (&sun);
-      EndMode3D ();
-    EndTextureMode ();
-    
-
     BeginDrawing ();
       ClearBackground (state.bg_color);
 
       BeginMode3D (camera);
         DrawChurch(&church);
+        DrawSun (&sun);
         RxtDrawGrid (10, 1.0f, GRAY);
         DrawPlane ((Vector3){ 0.f, 0.f, 0.f }, (Vector2){ 10.f, 10.f }, BLACK);
       EndMode3D ();
-      
-      BeginShaderMode (state.bloom_shader);
-        // A textura de renderização precisa ser invertida no eixo Y devido ao
-        // OpenGL padrão. coordenadas (canto inferior esquerdo)
-        DrawTextureRec (target.texture,
-                        (Rectangle){ 0, 0, (float)target.texture.width,
-                                     (float)-target.texture.height },
-                        (Vector2){ 0, 0 }, WHITE);
-      EndShaderMode ();
+
       DrawFPS (700, 15);
     EndDrawing ();
     //----------------------------------------------------------------------------------
