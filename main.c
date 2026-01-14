@@ -26,32 +26,34 @@ IDrawGrid (int slices, float spacing, Color color)
 
 void DrawSun(int *dir, Vector3 *pos){
 
-  float SPEED = 0.04f;
+  float SPEED = 0.05f;
+  float MIN = 0.0f;
+  float MAX = 10.0f;
 
   switch(*dir){
     case 0:
-      if(pos->x > 10.0f){
+      if(pos->x > MAX){
         *dir = 1;
         break;
       }
       pos->x += SPEED;
     break;
     case 1:
-      if(pos->y > 10.0f){
+      if(pos->y > MAX){
         *dir = 2;
         break;
       }
       pos->y += SPEED;
     break;
     case 2:
-      if(pos->x < 0.0f){
+      if(pos->x < MIN){
         *dir = 3;
         break;
       }
       pos->x -= SPEED;
     break;
     case 3:
-      if(pos->y < 0.0f){
+      if(pos->y < MIN){
         *dir = 0;
         break;
       }
