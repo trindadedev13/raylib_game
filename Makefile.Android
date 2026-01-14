@@ -169,7 +169,7 @@ all: build_c \
      compile_project_code \
      compile_project_class \
      compile_project_class_dex \
-     add_native_libs_to_apk \
+     add_libs_and_res_to_apk \
      sign_project_apk_package \
      zipalign_project_apk_package
 
@@ -248,7 +248,7 @@ ifeq ($(OS),Windows_NT)
 else
 	@echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > $(PROJECT_BUILD_PATH)/res/values/strings.xml 
 	@echo "<resources><string name=\"app_name\">$(APP_LABEL_NAME)</string></resources>" >> $(PROJECT_BUILD_PATH)/res/values/strings.xml
-	@[ -d "$(PROJECT_RESOURCES_PATH)" ] || cp -rf $(PROJECT_RESOURCES_PATH) $(PROJECT_BUILD_PATH)/assets/$(PROJECT_RESOURCES_PATH)	
+	@[ -d "$(PROJECT_RESOURCES_PATH)" ] && cp -rf $(PROJECT_RESOURCES_PATH)/* $(PROJECT_BUILD_PATH)/assets/$(PROJECT_RESOURCES_PATH)/
 endif
 
 # Generate NativeLoader.java to load required shared libraries
@@ -380,10 +380,9 @@ compile_project_class:
 compile_project_class_dex:
 	$(ANDROID_BUILD_TOOLS)/dx --verbose --dex --output=$(PROJECT_BUILD_PATH)/bin/classes.dex $(PROJECT_BUILD_PATH)/obj
 
-add_native_libs_to_apk:
+add_libs_and_res_to_apk:
 	cd $(PROJECT_BUILD_PATH) && \
-	zip -u bin/unaligned.apk \
-	lib/$(ANDROID_ARCH_NAME)/lib$(PROJECT_LIBRARY_NAME).so && \
+	zip -ur bin/unaligned.apk lib/$(ANDROID_ARCH_NAME)/lib$(PROJECT_LIBRARY_NAME).so assets && \
 	cd bin && \
 	zip -u unaligned.apk classes.dex
 
