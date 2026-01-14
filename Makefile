@@ -4,6 +4,10 @@ LIBS    = -lraylib
 
 all: raylib_game
 
+clean:
+	rm -rf *.o
+	rm -rf raylib_game
+
 raylib_game: main.o rlext.o church.o sun.o
 	$(CC) $(CC_FLAGS) $^ $(LIBS) -o $@
 
