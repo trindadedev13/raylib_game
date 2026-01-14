@@ -1,6 +1,7 @@
 #include <raylib.h>
 
 #include "sun.h"
+#include "church.h"
 #include "rlext.h"
 
 #if defined(PLATFORM_DESKTOP)
@@ -69,6 +70,10 @@ main (void) {
               .pos = (Vector3){ 0.f, 10.f, 10.f } };
   LoadSunTexture (&sun);
 
+  // criar igreja
+  Church church = {.pos =(Vector3) {0.f, 0.f, 0.f}};
+  LoadChurch(&church);
+
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FREE);
 
@@ -84,7 +89,8 @@ main (void) {
     BeginDrawing ();
       ClearBackground (state.bg_color);
 
-      BeginMode3D (camera);        
+      BeginMode3D (camera);
+        DrawChurch(&church);
         RxtDrawGrid (10, 1.0f, GRAY);
         DrawPlane ((Vector3){ 0.f, 0.f, 0.f }, (Vector2){ 10.f, 10.f }, BLACK);
       EndMode3D ();
