@@ -21,3 +21,15 @@ RxtDrawGrid (int slices, float space, Color color) {
   }
   rlEnd ();
 }
+
+Model RxtCreatePlane(Vector2 size, char* texture_dir){
+  Texture2D texture = LoadTexture(texture_dir);
+
+  Mesh meshPlane = GenMeshPlane(size.x, size.y, 1, 1);
+
+  Model model = LoadModelFromMesh(meshPlane);
+
+  model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+
+  return model;
+}

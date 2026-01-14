@@ -4,5 +4,6 @@
 #include <raylib.h>
 
 void RxtDrawGrid (int, float, Color);
+Model RxtCreatePlane(Vector2, char*);
 
 #endif

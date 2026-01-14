@@ -61,6 +61,9 @@ main (void) {
 
   SetTargetFPS (60);
 
+  //criar plano com textura
+  Model plane = RxtCreatePlane((Vector2){10.0f, 10.0f}, "resources/terrain2.jpeg");
+
   // criar o sol
   Sun sun = { .dir = 0,
               .speed = 0.05f,
@@ -86,7 +89,8 @@ main (void) {
         DrawChurch(&church);
         DrawSun (&sun);
         RxtDrawGrid (10, 1.0f, GRAY);
-        DrawPlane ((Vector3){ 0.f, 0.f, 0.f }, (Vector2){ 10.f, 10.f }, BLACK);
+        //DrawPlane ((Vector3){ 0.f, 0.f, 0.f }, (Vector2){ 10.f, 10.f }, BLACK);
+        DrawModel(plane, (Vector3){0.0f, 0.0f, 0.0f}, 1.0f, WHITE);
       EndMode3D ();
 
       DrawFPS (700, 15);
