@@ -1,9 +1,18 @@
-CC = gcc
-CFLAGS = -Wall -std=c99 -pedantic
-LIBS = -lraylib
+CC       = gcc
+CC_FLAGS = -Wall -std=c99 -pedantic
+LIBS     = -lraylib
 
-all:
-	$(CC) main.c -o raylib_game $(CFLAGS) $(LIBS)
+all: raylib_game
+
+clean:
+	rm -rf *.o
+	rm -rf raylib_game
+
+raylib_game: main.o
+	$(CC) $(CC_FLAGS) $(LIBS) $^ -o $@
+
+main.o: src/main.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 run:
 	./raylib_game

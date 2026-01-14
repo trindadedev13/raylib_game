@@ -67,14 +67,12 @@ PROJECT_LIBRARY_NAME   ?= main
 PROJECT_BUILD_ID       ?= android
 PROJECT_BUILD_PATH     ?= $(PROJECT_BUILD_ID).$(PROJECT_NAME)
 PROJECT_RESOURCES_PATH ?= resources
-PROJECT_SOURCE_FILES   ?= main.c
 NATIVE_APP_GLUE_PATH    = $(ANDROID_NDK)/sources/android/native_app_glue
 
 # Some source files are placed in directories, when compiling to some 
 # output directory other than source, that directory must pre-exist.
 # Here we get a list of required folders that need to be created on
 # code output folder $(PROJECT_BUILD_PATH)\obj to avoid GCC errors.
-PROJECT_SOURCE_DIRS     = $(sort $(dir $(PROJECT_SOURCE_FILES)))
 
 # Android app configuration variables
 APP_LABEL_NAME         ?= rGame
@@ -154,13 +152,14 @@ LDFLAGS += -L. -L$(PROJECT_BUILD_PATH)/obj -L$(PROJECT_BUILD_PATH)/lib/$(ANDROID
 # if you want to link libraries (libname.so or libname.a), use the -lname
 LDLIBS = -lm -lc -lraylib -llog -landroid -lEGL -lGLESv2 -lOpenSLES -ldl
 
-# Generate target objects list from PROJECT_SOURCE_FILES
-OBJS = $(patsubst %.c, $(PROJECT_BUILD_PATH)/obj/%.o, $(PROJECT_SOURCE_FILES))
+# project obj files
+OBJS = $(wildcard *.o)
 
 # Android APK building process... some steps required...
 # NOTE: typing 'make' will invoke the default target entry called 'all'
 # TODO: Use apksigner for APK signing, jarsigner is not recommended
-all: create_temp_project_dirs \
+all: build_c \
+     create_temp_project_dirs \
      copy_project_required_libs \
      copy_project_resources \
      generate_loader_script \
@@ -173,6 +172,10 @@ all: create_temp_project_dirs \
      add_native_libs_to_apk \
      sign_project_apk_package \
      zipalign_project_apk_package
+
+
+build_c:
+	make -f Makefile
 
 # WARNING: About build signing process:
 #  - If using apksigner, zipalign must be used before the APK file has been signed.
@@ -221,12 +224,7 @@ else
 	mkdir -p $(PROJECT_BUILD_PATH)/assets/$(PROJECT_RESOURCES_PATH)
 	mkdir -p $(PROJECT_BUILD_PATH)/obj/screens
 endif
-	$(foreach dir, $(PROJECT_SOURCE_DIRS), $(call create_dir, $(dir)))
 
-define create_dir
-    mkdir -p $(PROJECT_BUILD_PATH)/obj/$(1)
-endef
-    
 # Copy required shared libs for integration into APK
 # NOTE: If using shared libs they are loaded by generated NativeLoader.java
 copy_project_required_libs:
