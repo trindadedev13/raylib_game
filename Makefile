@@ -6,8 +6,4 @@ all:
 	$(CC) main.c -o main $(CFLAGS) $(LIBS)
 
 run:
-	./main 
-
-buildR:
-	make
-	make run	
+	./main
