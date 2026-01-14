@@ -28,6 +28,7 @@ main (void)
     BeginMode3D (camera);
       DrawCube (cube_pos, 2.f, 2.f, 2.f, BLUE);
       DrawCubeWires(cube_pos, 2.f, 2.f, 2.f, MAROON);
+      DrawPlane((Vector3){0.0f,0.0f,0.0f}, (Vector2){32.0f,32.0f}, GREEN);
       DrawGrid (10, 1.f);
     EndMode3D ();
 
