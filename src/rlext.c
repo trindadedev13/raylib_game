@@ -13,8 +13,8 @@ RxtDrawGrid (int slices, float space, Color color) {
     rlColor3f (color.r, color.g, color.b);
     rlColor3f (color.r, color.g, color.b);
 
-    rlVertex3f ((float)i * space, 0.f, (float)i * space);
-    rlVertex3f ((float)i * space, 0.f, (float)i * space);
+    rlVertex3f ((float)i * space, 0.f, (float)-half_slices * space);
+    rlVertex3f ((float)i * space, 0.f, (float)half_slices* space);
 
     rlVertex3f ((float)-half_slices * space, 0.f, (float)i * space);
     rlVertex3f ((float)half_slices * space, 0.f, (float)i * space);
