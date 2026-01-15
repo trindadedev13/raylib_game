@@ -62,7 +62,7 @@ DrawPad (Pad *pad, Camera3D *cam) {
   // dai fazer o m movimento
   float cam_accel = 5.f * GetFrameTime ();
   // se deixar true, ele nao vai poder "voar" pelo mundo, apenas andar, igual FPS
-  bool move_in_world_plane = false;
+  bool move_in_world_plane = true;
 #define is(i) pad->pressed == i
   if (is (BUTTON_UP)) {
     CameraMoveForward (cam, cam_accel, move_in_world_plane);

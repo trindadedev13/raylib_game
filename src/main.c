@@ -50,7 +50,7 @@ main (void) {
 #endif
 
   Camera camera = { 0 };
-  camera.position = (Vector3){ 2.0f, 3.0f, 2.0f };
+  camera.position = (Vector3){ 0.0f, 1.0f, 2.0f };
   camera.target = (Vector3){ 0.0f, 1.0f, 0.0f };
   camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
   camera.fovy = 45.0f;
@@ -65,7 +65,7 @@ main (void) {
   SetTargetFPS (60);
 
   //criar plano com textura
-  Model plane = RxtCreatePlane((Vector2){10.0f, 10.0f}, "resources/textures/terrain2.jpeg");
+  Model plane = RxtCreatePlane((Vector2){50.0f, 50.0f}, "resources/textures/terrain2.jpeg");
 
   // criar o sol
   Sun sun = { .dir = 0,
@@ -86,7 +86,7 @@ main (void) {
 #endif
 
   while (!WindowShouldClose ()) {
-    UpdateCamera (&camera, CAMERA_FREE);
+    UpdateCamera (&camera, CAMERA_FIRST_PERSON);
 
     BeginDrawing ();
       ClearBackground (state.bg_color);
@@ -94,8 +94,7 @@ main (void) {
       BeginMode3D (camera);
         DrawChurch(&church);
         DrawSun (&sun);
-        RxtDrawGrid (10, 1.0f, GRAY);
-        //DrawPlane ((Vector3){ 0.f, 0.f, 0.f }, (Vector2){ 10.f, 10.f }, BLACK);
+        RxtDrawGrid (50, 1.0f, GRAY);
         DrawModel(plane, (Vector3){0.0f, 0.0f, 0.0f}, 1.0f, WHITE);
       EndMode3D ();
 
