@@ -61,16 +61,17 @@ DrawPad (Pad *pad, Camera3D *cam) {
   // verificar qual botao for clicado
   // dai fazer o m movimento
   float cam_accel = 5.f * GetFrameTime ();
+  // se deixar true, ele nao vai poder "voar" pelo mundo, apenas andar, igual FPS
+  bool move_in_world_plane = false;
 #define is(i) pad->pressed == i
   if (is (BUTTON_UP)) {
-    CameraMoveForward (cam, cam_accel, true);
+    CameraMoveForward (cam, cam_accel, move_in_world_plane);
   } else if (is (BUTTON_LEFT)) {
-    CameraMoveRight (cam, -cam_accel, true);
+    CameraMoveRight (cam, -cam_accel, move_in_world_plane);
   } else if (is (BUTTON_DOWN)) {
-    CameraMoveForward (cam, -cam_accel, true);
-
+    CameraMoveForward (cam, -cam_accel, move_in_world_plane);
   } else if (is (BUTTON_RIGHT)) {
-    CameraMoveRight (cam, cam_accel, true);
+    CameraMoveRight (cam, cam_accel, move_in_world_plane);
   }
 #undef is
   for (int i = 0; i < BUTTON_MAX; i++) {
