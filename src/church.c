@@ -7,7 +7,7 @@
 void
 LoadChurch (Church *church) {
   church->model = LoadModel ("resources/models/church.obj");
-  church->tex = LoadTexture ("resources/models/church_diffuse.png");
+  church->tex = LoadTexture ("resources/textures/church_diffuse.png");
   church->model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = church->tex;
   church->model.materials[0].maps[MATERIAL_MAP_EMISSION].texture = church->tex;
 }

@@ -3,7 +3,7 @@
 void
 LoadSunTexture (Sun *sun) {
   // carrega a imagem
-  sun->tex = LoadTexture ("resources/sun.png");
+  sun->tex = LoadTexture ("resources/textures/sun.png");
   // cria uma malha de esfera
   Mesh mesh = GenMeshSphere (1.f, 16, 16);
   // cria um modelo desenhavel da nossa malha
