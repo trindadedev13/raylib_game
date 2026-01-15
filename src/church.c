@@ -14,7 +14,7 @@ LoadChurch (Church *church) {
 
 void
 DrawChurch (Church *church) {
-  DrawModel (church->model, church->pos, 0.1f, WHITE);
+  DrawModel (church->model, church->pos, 0.5f, WHITE);
 }
 
 void
