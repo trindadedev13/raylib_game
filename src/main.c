@@ -65,7 +65,7 @@ main (void) {
   SetTargetFPS (60);
 
   //criar plano com textura
-  Model plane = RxtCreatePlane((Vector2){10.0f, 10.0f}, "resources/terrain2.jpeg");
+  Model plane = RxtCreatePlane((Vector2){10.0f, 10.0f}, "resources/textures/terrain2.jpeg");
 
   // criar o sol
   Sun sun = { .dir = 0,
