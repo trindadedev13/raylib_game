@@ -1,5 +1,5 @@
 CC      = gcc
-CC_FLAGS = -Wall -std=c99 -pedantic -Iinclude
+CC_FLAGS = -Wall -std=c99 -pedantic -Iinclude -Iraylib/src/
 LIBS    = -lraylib
 
 all: raylib_game

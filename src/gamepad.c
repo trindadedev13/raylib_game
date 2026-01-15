@@ -4,11 +4,12 @@
 #include <math.h>
 #include <raylib.h>
 #include <raymath.h>
+#include <rcamera.h>
 #include <string.h>
 
 void
 CreatePad (Pad *pad) {
-  Vector2 pad_pos = { 200,  GetScreenHeight() - BUTTON_RADIUS * 3 };
+  Vector2 pad_pos = { 200, GetScreenHeight () - BUTTON_RADIUS * 3 };
 
   Vector2 buttons_pos[BUTTON_MAX] = {
     { pad_pos.x, pad_pos.y - BUTTON_RADIUS * 1.5f }, // Up
@@ -60,28 +61,16 @@ DrawPad (Pad *pad, Camera3D *cam) {
   // verificar qual botao for clicado
   // dai fazer o m movimento
   float cam_accel = 5.f * GetFrameTime ();
-  Vector3 forward
-      = Vector3Normalize (Vector3Subtract (cam->target, cam->position));
-  Vector3 right = Vector3CrossProduct (forward, cam->up);
 #define is(i) pad->pressed == i
   if (is (BUTTON_UP)) {
-    cam->position
-        = Vector3Add (cam->position, Vector3Scale (forward, cam_accel));
-    cam->target = Vector3Add (cam->target, Vector3Scale (forward, cam_accel));
+    CameraMoveForward (cam, cam_accel, true);
   } else if (is (BUTTON_LEFT)) {
-    cam->position
-        = Vector3Subtract (cam->position, Vector3Scale (right, cam_accel));
-    cam->target
-        = Vector3Subtract (cam->target, Vector3Scale (right, cam_accel));
+    CameraMoveRight (cam, -cam_accel, true);
   } else if (is (BUTTON_DOWN)) {
-    cam->position
-        = Vector3Subtract (cam->position, Vector3Scale (forward, cam_accel));
-    cam->target
-        = Vector3Subtract (cam->target, Vector3Scale (forward, cam_accel));
+    CameraMoveForward (cam, -cam_accel, true);
+
   } else if (is (BUTTON_RIGHT)) {
-    cam->position
-        = Vector3Add (cam->position, Vector3Scale (right, cam_accel));
-    cam->target = Vector3Add (cam->target, Vector3Scale (right, cam_accel));
+    CameraMoveRight (cam, cam_accel, true);
   }
 #undef is
   for (int i = 0; i < BUTTON_MAX; i++) {
