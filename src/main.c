@@ -80,8 +80,10 @@ main (void) {
   Church church = {.pos =(Vector3) {0.f, 0.f, 0.f}};
   LoadChurch(&church);
 
+#ifdef __ANDROID__
   Pad pad = {0};
   CreatePad(&pad);
+#endif
 
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FREE);
@@ -98,7 +100,9 @@ main (void) {
       EndMode3D ();
 
       DrawFPS (700, 15);
+#ifdef __ANDROID__
       DrawPad (&pad, &camera);
+#endif
     EndDrawing ();
     //----------------------------------------------------------------------------------
   }
