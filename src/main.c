@@ -96,36 +96,6 @@ main (void) {
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FIRST_PERSON);
 
-
-    //acho que fazer um hello world em binario é mais curto do que renderizar essa bomba
-    if (IsFileDropped())
-{
-    FilePathList droppedFiles = LoadDroppedFiles();
-
-    if (droppedFiles.count == 1 &&
-        IsFileExtension(droppedFiles.paths[0], ".png;.jpg;.bmp;.tga"))
-    {
-        UnloadTexture(
-            skybox.model.materials[0]
-                .maps[MATERIAL_MAP_CUBEMAP]
-                .texture
-        );
-
-        Image img = LoadImage(droppedFiles.paths[0]);
-        TextureCubemap cubemap =
-            LoadTextureCubemap(img, CUBEMAP_LAYOUT_AUTO_DETECT);
-        UnloadImage(img);
-
-        skybox.model.materials[0]
-            .maps[MATERIAL_MAP_CUBEMAP]
-            .texture = cubemap;
-    }
-
-    UnloadDroppedFiles(droppedFiles);
-}
-
-
-
     BeginDrawing ();
       ClearBackground (state.bg_color);
 
