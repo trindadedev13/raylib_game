@@ -64,7 +64,7 @@ main (void) {
   // criar renderizador de textura pra renderizar
   RenderTexture2D target = LoadRenderTexture (state.width, state.height);
 
-  SetTargetFPS (60);
+  SetTargetFPS (120);
 
   //criar plano com textura
   Model plane = RxtCreatePlane((Vector2){50.0f, 50.0f}, "resources/textures/terrain2.jpeg");
