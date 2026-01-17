@@ -1,21 +1,19 @@
 #include <raylib.h>
+#include <rlgl.h>
 
 #include "gamepad.h"
 #include "sun.h"
 #include "church.h"
 #include "rlext.h"
-
-#if defined(PLATFORM_DESKTOP)
-#define GLSL_VERSION 330
-#else // PLATFORM_ANDROID, PLATFORM_WEB
-#define GLSL_VERSION 100
-#endif
+#include "glsl.h"
+#include "sky.h"
 
 typedef struct {
   Shader bloom_shader;
   int width, height;
   Color bg_color;
 } State;
+
 
 static State state = { 0 };
 
@@ -28,6 +26,10 @@ LoadBloomShader (void) {
   Vector2 size = { state.width, state.height };
   SetShaderValue (state.bloom_shader, size_loc, &size, SHADER_UNIFORM_VEC2);
 }
+
+
+
+
 
 int
 main (void) {
@@ -80,6 +82,12 @@ main (void) {
   Church church = {.pos =(Vector3) {0.f, 0.f, 0.f}};
   LoadChurch(&church);
 
+  //criar skybox
+  Sky skybox = createSkybox();
+
+  
+
+
 #ifdef __ANDROID__
   Pad pad = {0};
   CreatePad(&pad);
@@ -88,14 +96,54 @@ main (void) {
   while (!WindowShouldClose ()) {
     UpdateCamera (&camera, CAMERA_FIRST_PERSON);
 
+
+    //acho que fazer um hello world em binario é mais curto do que renderizar essa bomba
+    if (IsFileDropped())
+{
+    FilePathList droppedFiles = LoadDroppedFiles();
+
+    if (droppedFiles.count == 1 &&
+        IsFileExtension(droppedFiles.paths[0], ".png;.jpg;.bmp;.tga"))
+    {
+        UnloadTexture(
+            skybox.model.materials[0]
+                .maps[MATERIAL_MAP_CUBEMAP]
+                .texture
+        );
+
+        Image img = LoadImage(droppedFiles.paths[0]);
+        TextureCubemap cubemap =
+            LoadTextureCubemap(img, CUBEMAP_LAYOUT_AUTO_DETECT);
+        UnloadImage(img);
+
+        skybox.model.materials[0]
+            .maps[MATERIAL_MAP_CUBEMAP]
+            .texture = cubemap;
+    }
+
+    UnloadDroppedFiles(droppedFiles);
+}
+
+
+
     BeginDrawing ();
       ClearBackground (state.bg_color);
 
       BeginMode3D (camera);
+
+      //desativa profundidade etc para o skybox ficar no fundo e nao atrapalhar o mundo
+      rlDisableBackfaceCulling();
+      rlDisableDepthMask();
+          DrawModel(skybox.model, (Vector3){0, 0, 0}, 1.0f, WHITE);
+      rlEnableBackfaceCulling();
+      rlEnableDepthMask();
+
         DrawChurch(&church);
         DrawSun (&sun);
         RxtDrawGrid (50, 1.0f, GRAY);
         DrawModel(plane, (Vector3){0.0f, 0.0f, 0.0f}, 1.0f, WHITE);
+
+         
       EndMode3D ();
 
       DrawFPS (700, 15);
